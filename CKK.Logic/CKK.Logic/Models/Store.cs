@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CKK.Logic.Models
 {
-    class Store
+    public class Store
     {
         private int _id;
         private string _name;
@@ -36,22 +36,59 @@ namespace CKK.Logic.Models
 
         public void AddStoreItem(Product prod)
         {
-
+            if (_product1 == null)
+            {
+                _product1 = prod;
+            }else if(_product2 == null)
+            {
+                _product2 = prod;
+            }else if(_product3 == null)
+            {
+                _product3 = prod;
+            }else { Console.WriteLine("Full"); }
         }
 
         public void RemoveStoreItem(int productNum)
         {
-
+            if (productNum == 1)
+            {
+                _product1 = null;
+            }
+            else if (productNum == 2)
+            {
+                _product2 = null;
+            }else if (productNum == 3)
+            {
+                _product3 = null;
+            }
         }
 
         public Product GetStoreItem(int productNum)
         {
-            return _product1;
+            if(productNum == 1)
+            {
+                if (_product1 == null)
+                {
+                    return null;
+                }else { return _product1; }
+            }else if(productNum == 2)
+            {
+                if(_product2 == null)
+                {
+                    return null;
+                }else { return _product2; }   
+            }else if(productNum == 3)
+            {
+                if (_product3 == null)
+                {
+                    return null;
+                }else { return _product3; }
+            }else { Console.WriteLine("Invalid");return null; }
         }
 
         public Product FindStoreItemById(int id)
         {
-            return _product1;
+            return null;
         }
     }
 }

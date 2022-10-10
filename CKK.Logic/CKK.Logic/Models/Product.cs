@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CKK.Logic.Models
 {
-    class Product
+    public class Product
     {
         private int _id;
         private string _name;
-        private double _Price;
+        private decimal _Price;
 
         public int GetId()
         {
@@ -32,12 +32,12 @@ namespace CKK.Logic.Models
             _name = name;
         }
 
-        public double GetPrice()
+        public decimal GetPrice()
         {
             return _Price;
         }
 
-        public void SetPrice(double Price)
+        public void SetPrice(decimal Price)
         {
             _Price = Price;
         }
