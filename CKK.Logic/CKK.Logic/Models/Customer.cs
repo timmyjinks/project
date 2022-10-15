@@ -10,7 +10,7 @@ namespace CKK.Logic.Models
     {
         private int _id;
         private string _name;
-        private double _Address;
+        private string _Address;
 
         public int GetId()
         {
@@ -32,12 +32,12 @@ namespace CKK.Logic.Models
             _name = name;
         }
 
-        public double GetAddress()
+        public string GetAddress()
         {
             return _Address;
         }
 
-        public void SetAddress(double Address)
+        public void SetAddress(string Address)
         {
             _Address = Address;
         }

@@ -10,3 +10,15 @@ C:\Users\4400115260\source\repos\project\CKK.Logic\CKK.Logic\obj\Debug\net5.0\CK
 C:\Users\4400115260\source\repos\project\CKK.Logic\CKK.Logic\obj\Debug\net5.0\CKK.Logic.dll
 C:\Users\4400115260\source\repos\project\CKK.Logic\CKK.Logic\obj\Debug\net5.0\ref\CKK.Logic.dll
 C:\Users\4400115260\source\repos\project\CKK.Logic\CKK.Logic\obj\Debug\net5.0\CKK.Logic.pdb
+C:\Users\Timmy Jinks\Source\Repos\project\CKK.Logic\CKK.Logic\bin\Debug\net5.0\CKK.Logic.deps.json
+C:\Users\Timmy Jinks\Source\Repos\project\CKK.Logic\CKK.Logic\bin\Debug\net5.0\CKK.Logic.dll
+C:\Users\Timmy Jinks\Source\Repos\project\CKK.Logic\CKK.Logic\bin\Debug\net5.0\CKK.Logic.pdb
+C:\Users\Timmy Jinks\Source\Repos\project\CKK.Logic\CKK.Logic\obj\Debug\net5.0\CKK.Logic.csproj.AssemblyReference.cache
+C:\Users\Timmy Jinks\Source\Repos\project\CKK.Logic\CKK.Logic\obj\Debug\net5.0\CKK.Logic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Timmy Jinks\Source\Repos\project\CKK.Logic\CKK.Logic\obj\Debug\net5.0\CKK.Logic.AssemblyInfoInputs.cache
+C:\Users\Timmy Jinks\Source\Repos\project\CKK.Logic\CKK.Logic\obj\Debug\net5.0\CKK.Logic.AssemblyInfo.cs
+C:\Users\Timmy Jinks\Source\Repos\project\CKK.Logic\CKK.Logic\obj\Debug\net5.0\CKK.Logic.csproj.CoreCompileInputs.cache
+C:\Users\Timmy Jinks\Source\Repos\project\CKK.Logic\CKK.Logic\obj\Debug\net5.0\CKK.Logic.dll
+C:\Users\Timmy Jinks\Source\Repos\project\CKK.Logic\CKK.Logic\obj\Debug\net5.0\refint\CKK.Logic.dll
+C:\Users\Timmy Jinks\Source\Repos\project\CKK.Logic\CKK.Logic\obj\Debug\net5.0\CKK.Logic.pdb
+C:\Users\Timmy Jinks\Source\Repos\project\CKK.Logic\CKK.Logic\obj\Debug\net5.0\ref\CKK.Logic.dll

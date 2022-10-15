@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31605.320
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CKK.Logic", "CKK.Logic\CKK.Logic.csproj", "{FA7BED8A-2F50-40A2-9FE4-5274487BA251}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CKK", "..\..\CKK-1 (1)\CKK\CKK.csproj", "{8B94E51E-3F0A-4DFB-89C2-45ACD5B026A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CKK", "CKK-1 (2)\CKK\CKK.csproj", "{454FC556-CFDB-4C23-995D-75740E878BE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{FA7BED8A-2F50-40A2-9FE4-5274487BA251}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA7BED8A-2F50-40A2-9FE4-5274487BA251}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA7BED8A-2F50-40A2-9FE4-5274487BA251}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8B94E51E-3F0A-4DFB-89C2-45ACD5B026A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B94E51E-3F0A-4DFB-89C2-45ACD5B026A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8B94E51E-3F0A-4DFB-89C2-45ACD5B026A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B94E51E-3F0A-4DFB-89C2-45ACD5B026A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{454FC556-CFDB-4C23-995D-75740E878BE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{454FC556-CFDB-4C23-995D-75740E878BE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{454FC556-CFDB-4C23-995D-75740E878BE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{454FC556-CFDB-4C23-995D-75740E878BE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
