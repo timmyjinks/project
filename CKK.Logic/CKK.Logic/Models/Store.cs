@@ -34,17 +34,17 @@ namespace CKK.Logic.Models
             _name = name;
         }
 
-        public void AddStoreItem(Product prod)
+        public void AddStoreItem(Product product)
         {
             if (_product1 == null)
             {
-                _product1 = prod;
+                _product1 = product;
             }else if(_product2 == null)
             {
-                _product2 = prod;
+                _product2 = product;
             }else if(_product3 == null)
             {
-                _product3 = prod;
+                _product3 = product;
             }else { Console.WriteLine("Full"); }
         }
 
