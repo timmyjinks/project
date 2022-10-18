@@ -5,7 +5,7 @@ using CKK.Logic.Models;
 
 namespace CKK.Test
 {
-    public class UnitTest1
+    public class CKKTests
     {
         [Fact]
         public void AddItemGetItemStoreItem_ShouldAddProduct()
