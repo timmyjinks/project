@@ -1,4 +1,6 @@
-﻿namespace CKK.Logic.Models
+﻿using System;
+
+namespace CKK.Logic.Models
 {
     public class ShoppingCartItem
     {

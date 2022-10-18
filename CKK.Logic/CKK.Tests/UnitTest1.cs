@@ -1,15 +1,15 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CKK.Tests;
+using CKK.Logic.Models;
 
 namespace CKK.Tests
 {
     [TestClass]
-    public class CustomerTests
+    public class UnitTest1
     {
         [TestMethod]
         public void TestMethod1()
         {
-            Customer n = new Customer();
+            
         }
     }
 }

@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {
+    "net5.0": {
       "coverlet.collector/1.2.0": {
         "type": "package",
         "build": {
@@ -1633,6 +1633,16 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
+        }
+      },
+      "CKK.Logic/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/CKK.Logic.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CKK.Logic.dll": {}
         }
       }
     }
@@ -5705,10 +5715,16 @@
         "system.xml.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "CKK.Logic/1.0.0": {
+      "type": "project",
+      "path": "../CKK.Logic/CKK.Logic.csproj",
+      "msbuildProject": "../CKK.Logic/CKK.Logic.csproj"
     }
   },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": [
+    "net5.0": [
+      "CKK.Logic >= 1.0.0",
       "MSTest.TestAdapter >= 2.1.0",
       "MSTest.TestFramework >= 2.1.0",
       "Microsoft.NET.Test.Sdk >= 16.5.0",
@@ -5737,16 +5753,20 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "netcoreapp3.1"
+        "net5.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "projectReferences": {
+            "C:\\Users\\4400115260\\source\\repos\\project\\CKK.Logic\\CKK.Logic\\CKK.Logic.csproj": {
+              "projectPath": "C:\\Users\\4400115260\\source\\repos\\project\\CKK.Logic\\CKK.Logic\\CKK.Logic.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -5756,8 +5776,8 @@
       }
     },
     "frameworks": {
-      "netcoreapp3.1": {
-        "targetAlias": "netcoreapp3.1",
+      "net5.0": {
+        "targetAlias": "net5.0",
         "dependencies": {
           "MSTest.TestAdapter": {
             "target": "Package",
