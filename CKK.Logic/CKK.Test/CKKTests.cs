@@ -7,65 +7,59 @@ namespace CKK.Test
 {
     public class CKKTests
     {
-        [Fact]
-        public void AddItemGetItemStoreItem_ShouldAddProduct()
-        {
-            try
-            {
-                //Assemble
-                Store store = new Store();
-                Product product = new Product();
-                Product expected = product;
-                //Act
-                store.AddStoreItem(product);
-                Product actual = store.GetStoreItem(1);
-                //Assert
-                Assert.Equal(expected, actual);
+        //[Fact]
+        //public void AddItemGetItemStoreItem_ShouldAddProduct()
+        //{
+        //    try
+        //    {
+        //        //Assemble
+        //        Customer customer = new Customer();
+        //        ShoppingCart cart = new ShoppingCart(customer);
+        //        //Act
                 
-            }
-            catch
-            {
-                throw new XunitException("The product Was not added.");
-            }
-        }
 
-        [Fact]
-        public void RemoveItemGetItemStoreItem_ShouldRemoveProduct()
-        {
-            try
-            {
-                //Assemble
-                Store store = new Store();
-                Product product = new Product();
-                Product expected = null;
-                //Act
-                store.AddStoreItem(product);
-                store.RemoveStoreItem(1);
-                Product actual = store.GetStoreItem(1);
-                //Assert
-                Assert.Equal(expected, actual);
-            }
-            catch
-            {
-                throw new XunitException("The Item Was not removed.");
-            }
-        }
+        //        Assert.Equal();
+
+        //    }
+        //    catch
+        //    {
+        //        throw new XunitException("Not correct id");
+        //    }
+        //}
+
+        //[Fact]
+        //public void RemoveItemGetItemStoreItem_ShouldRemoveProduct()
+        //{
+        //    try
+        //    {
+
+        //    }
+        //    catch
+        //    {
+        //        throw new XunitException("The Item Was not removed.");
+        //    }
+        //}
 
         [Fact]
         public void GetTotal_ShouldReturnCorrectValue()
         {
             try
             {
-                //Assemble
-                Product product = new Product();
-                product.SetPrice(5);
-                ShoppingCartItem item = new ShoppingCartItem(product, 4);
-                decimal expected = 20;
-                //Act
-                decimal actual = item.GetTotal();
+                Customer a = new Customer();
+                Product y = new Product();
+                y.SetId(5);
+                y.SetName("y");
+                y.SetPrice(25);
+                Product u = new Product();
+                y.SetId(6);
+                y.SetName("u");
+                y.SetPrice(56);
+                ShoppingCart cart = new ShoppingCart(a);
+                cart.AddProduct(y);
+                cart.AddProduct(u);
+                cart.GetProduct(1);
 
-                //Assert
-                Assert.Equal(expected, actual);
+
             }
             catch
             {
