@@ -10,9 +10,7 @@ namespace CKK.Logic.Models
     {
         private int _id;
         private string _name;
-        private Product _product1;
-        private Product _product2;
-        private Product _product3;
+        private List<StoreItem> Items = new List<StoreItem>();
 
         public int GetId()
         {
@@ -34,73 +32,74 @@ namespace CKK.Logic.Models
             _name = name;
         }
 
-        public void AddStoreItem(Product product)
-        {
-            if (_product1 == null)
-            {
-                _product1 = product;
-            }else if(_product2 == null)
-            {
-                _product2 = product;
-            }else if(_product3 == null)
-            {
-                _product3 = product;
-            }else { Console.WriteLine("Full"); }
-        }
+        //public StoreItem AddStoreItem(Product product, int quantity)
+        //{
+        //    if (_product1 == null)
+        //    {
+        //        _product1 = product;
+        //    }else if(_product2 == null)
+        //    {
+        //        _product2 = product;
+        //    }else if(_product3 == null)
+        //    {
+        //        _product3 = product;
+        //    }else { Console.WriteLine("Full"); }
+        //    return 
+        //}
 
-        public void RemoveStoreItem(int productNum)
-        {
-            if (productNum == 1)
-            {
-                _product1 = null;
-            }
-            else if (productNum == 2)
-            {
-                _product2 = null;
-            }else if (productNum == 3)
-            {
-                _product3 = null;
-            }
-        }
+        //public StoreItem RemoveStoreItem(int id, int quantity)
+        //{
+        //    if (productNum == 1)
+        //    {
+        //        _product1 = null;
+        //    }
+        //    else if (productNum == 2)
+        //    {
+        //        _product2 = null;
+        //    }else if (productNum == 3)
+        //    {
+        //        _product3 = null;
+        //    }
+        //}
 
-        public Product GetStoreItem(int productNum)
-        {
-            if(productNum == 1)
-            {
-                if (_product1 == null)
-                {
-                    return null;
-                }else { return _product1; }
-            }else if(productNum == 2)
-            {
-                if(_product2 == null)
-                {
-                    return null;
-                }else { return _product2; }   
-            }else if(productNum == 3)
-            {
-                if (_product3 == null)
-                {
-                    return null;
-                }else { return _product3; }
-            }else { Console.WriteLine("Invalid");return null; }
-        }
+        //public List<StoreItem> GetStoreItems()
+        //{
+        //    if(productNum == 1)
+        //    {
+        //        if (_product1 == null)
+        //        {
+        //            return null;
+        //        }else { return _product1; }
+        //    }else if(productNum == 2)
+        //    {
+        //        if(_product2 == null)
+        //        {
+        //            return null;
+        //        }else { return _product2; }   
+        //    }else if(productNum == 3)
+        //    {
+        //        if (_product3 == null)
+        //        {
+        //            return null;
+        //        }else { return _product3; }
+        //    }else { Console.WriteLine("Invalid");return null; }
+        //}
 
-        public Product FindStoreItemById(int id)
-        {
-            if (_product1.GetId() == id)
-            {
-                return _product1;
-            }
-            else if (_product2.GetId() == id)
-            {
-                return _product2;
-            }
-            else if (_product3.GetId() == id)
-            {
-                return _product3;
-            }
-            else { return null; }
-        }
+        //public Product FindStoreItemById(int id)
+        //{
+        //    if (_product1.GetId() == id)
+        //    {
+        //        return _product1;
+        //    }
+        //    else if (_product2.GetId() == id)
+        //    {
+        //        return _product2;
+        //    }
+        //    else if (_product3.GetId() == id)
+        //    {
+        //        return _product3;
+        //    }
+        //    else { return null; }
+        //}
     }
 }
