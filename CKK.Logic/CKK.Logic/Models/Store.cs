@@ -32,74 +32,89 @@ namespace CKK.Logic.Models
             _name = name;
         }
 
-        //public StoreItem AddStoreItem(Product product, int quantity)
-        //{
-        //    if (_product1 == null)
-        //    {
-        //        _product1 = product;
-        //    }else if(_product2 == null)
-        //    {
-        //        _product2 = product;
-        //    }else if(_product3 == null)
-        //    {
-        //        _product3 = product;
-        //    }else { Console.WriteLine("Full"); }
-        //    return 
-        //}
+        public StoreItem AddStoreItem(Product product, int quantity)
+        {
+            var q =
+                from i in Items
+                where i.GetProduct() == product
+                select i;
+            if (quantity > 0)
+            {
+                if (Items.Count == 0)
+                {
+                    Items.Add(new StoreItem(product, quantity));
+                    return Items[0];
+                }
+                else if (Items.Count != 0)
+                {
+                    int count = 0;
+                    foreach (var prod in Items)
+                    {
+                        count++;
+                        if (prod.GetProduct() != product && count == Items.Count())
+                        {
+                            Items.Add(new StoreItem(product, quantity));
+                            foreach (var obj in q)
+                            {
+                                return obj;
+                            }
+                            return null;
+                        }
+                        else if (prod.GetProduct() == product)
+                        {
+                            foreach (var obj in q)
+                            {
+                                quantity = obj.GetQuantity() + quantity;
+                                obj.SetQuantity(quantity);
+                                return obj;
+                            }
+                            return null;
+                        }
+                    }
+                    return null;
+                }
+                else { return null; }
+            }else { return null; }
+        }
 
-        //public StoreItem RemoveStoreItem(int id, int quantity)
-        //{
-        //    if (productNum == 1)
-        //    {
-        //        _product1 = null;
-        //    }
-        //    else if (productNum == 2)
-        //    {
-        //        _product2 = null;
-        //    }else if (productNum == 3)
-        //    {
-        //        _product3 = null;
-        //    }
-        //}
+        public StoreItem RemoveStoreItem(int id, int quantity)
+        {
+            var q =
+                from i in Items
+                where i.GetProduct().GetId() == id
+                select i;
+            foreach (var prod in q)
+            {
+                if (quantity - prod.GetQuantity() > 0)
+                {
+                    prod.SetQuantity(0);
+                    return prod;
+                }
+                else
+                {
+                    quantity = prod.GetQuantity() - quantity;
+                    prod.SetQuantity(quantity);
+                    return prod;
+                }
+            }
+            return null;
+        }
 
-        //public List<StoreItem> GetStoreItems()
-        //{
-        //    if(productNum == 1)
-        //    {
-        //        if (_product1 == null)
-        //        {
-        //            return null;
-        //        }else { return _product1; }
-        //    }else if(productNum == 2)
-        //    {
-        //        if(_product2 == null)
-        //        {
-        //            return null;
-        //        }else { return _product2; }   
-        //    }else if(productNum == 3)
-        //    {
-        //        if (_product3 == null)
-        //        {
-        //            return null;
-        //        }else { return _product3; }
-        //    }else { Console.WriteLine("Invalid");return null; }
-        //}
+        public List<StoreItem> GetStoreItems()
+        {
+            return Items;
+        }
 
-        //public Product FindStoreItemById(int id)
-        //{
-        //    if (_product1.GetId() == id)
-        //    {
-        //        return _product1;
-        //    }
-        //    else if (_product2.GetId() == id)
-        //    {
-        //        return _product2;
-        //    }
-        //    else if (_product3.GetId() == id)
-        //    {
-        //        return _product3;
-        //    }
-        //    else { return null; }
-        //}
+        public StoreItem FindStoreItemById(int id)
+        {
+            var q =
+                from i in Items
+                where i.GetProduct().GetId() == id
+                select i;
+            foreach(var i in q)
+            {
+                return i;
+            }return null;
+        }
     }
 }

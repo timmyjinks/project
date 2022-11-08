@@ -33,49 +33,63 @@ namespace CKK.Logic.Models
                 from i in Products
                 where i.GetProduct() == product
                 select i;
-            if (Products.Count == 0)
+            if (quantity > 0)
             {
-                Products.Add(new ShoppingCartItem(product, quantity));
-                return Products[0];
-            }else if (Products.Count != 0)
-            {
-                int count = 0;
-                foreach (var prod in Products)
+                if (Products.Count == 0)
                 {
-                    count++;
-                    if (prod.GetProduct() != product && count == Products.Count())
+                    Products.Add(new ShoppingCartItem(product, quantity));
+                    Products[0].SetQuantity(1);
+                    return Products[0];
+                }
+                else if (Products.Count != 0)
+                {
+                    int count = 0;
+                    foreach (var prod in Products)
                     {
-                        Products.Add(new ShoppingCartItem(product, quantity));
-                        foreach (var obj in q)
+                        count++;
+                        if (prod.GetProduct() != product && count == Products.Count())
                         {
-                            return obj;
-                        }return null;
-                    }else if (prod.GetProduct() == product)
-                    {
-                        foreach (var obj in q)
+                            Products.Add(new ShoppingCartItem(product, quantity));
+                            foreach (var obj in q)
+                            {
+                                obj.SetQuantity(quantity);
+                                return obj;
+                            }
+                            return null;
+                        }
+                        else if (prod.GetProduct() == product)
                         {
-                            quantity = obj.GetQuantity() + quantity;
-                            obj.SetQuantity(quantity);
-                            return obj;
-                        }return null;
-                    }
-                }return null;
+                            foreach (var obj in q)
+                            {
+                                quantity = obj.GetQuantity() + quantity;
+                                obj.SetQuantity(quantity);
+                                return obj;
+                            }return null;
+                        }
+                    }return null;
+                }else { return null; }
             }else { return null; }
         }
 
-        public ShoppingCartItem RemoveProduct(Product product, int quantity)
+        public ShoppingCartItem RemoveProduct(int id, int quantity)
         {
             var q =
                 from i in Products
-                where i.GetProduct() == product
+                where i.GetProduct().GetId() == id
                 select i;
             foreach(var prod in q)
             {
-                if(quantity - prod.GetQuantity() > 0)
+                if (prod.GetQuantity() - quantity < 1 || prod.GetQuantity() < 0 || prod.GetQuantity() == 0)
                 {
+                    Products.Remove(prod);
                     prod.SetQuantity(0);
                     return prod;
-                }else
+                }else if(prod.GetQuantity() < 0 || prod.GetQuantity() == 0)
+                {
+                    Products.Remove(prod);
+                    return prod;
+                }
+                else
                 {
                     quantity = prod.GetQuantity() - quantity;
                     prod.SetQuantity(quantity);
@@ -88,18 +102,31 @@ namespace CKK.Logic.Models
         {
             var total =
                 from i in Products
-                let value = i.GetQuantity()
+                let value = i.GetTotal()
                 select value;
             foreach (var prod in total)
             {
-                
-                
-            }return 0;
+                return prod; 
+            }
+            return 0;
         }
 
         public List<ShoppingCartItem> GetProducts()
         {
             return Products;
+        }
+
+        public ShoppingCartItem FindStoreItemById(int id)
+        {
+            var q =
+                from i in Products
+                where i.GetProduct().GetId() == id
+                select i;
+            foreach (var i in q)
+            {
+                return i;
+            }
+            return null;
         }
     }
 }
