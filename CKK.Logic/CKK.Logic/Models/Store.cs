@@ -74,7 +74,8 @@ namespace CKK.Logic.Models
                     return null;
                 }
                 else { return null; }
-            }else { return null; }
+            }
+            else { return null; }
         }
 
         public StoreItem RemoveStoreItem(int id, int quantity)

@@ -25,29 +25,19 @@ namespace CKKConsole
             d.SetId(4);
             Customer customer = new Customer();
             ShoppingCart cart = new ShoppingCart(customer);
-            for(int i = 0; i < 10;i++)
-            {
-                cart.AddProduct(a, 1);
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                cart.AddProduct(b, 1);
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                cart.AddProduct(c, 1);
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                cart.AddProduct(d, 1);
-            }
-            cart.AddProduct(a, 0);
+            cart.AddProduct(a, 10);
+            cart.AddProduct(b, 10);
+            cart.AddProduct(c, 10);
 
+            cart.RemoveProduct(1, 20);
+            cart.RemoveProduct(2, 9);
+            cart.RemoveProduct(3, 8);
+            cart.AddProduct(a, 1);
             foreach (var i in cart.GetProducts())
             {
                 Console.WriteLine(i.GetProduct().GetName() + " || " + i.GetQuantity());
             }
-            Console.WriteLine(cart.GetTotal());
+            //Console.WriteLine(cart.FindStoreItemById(2).GetProduct().GetName());
         }
     }
 }

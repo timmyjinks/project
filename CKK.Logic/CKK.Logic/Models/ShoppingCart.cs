@@ -35,10 +35,9 @@ namespace CKK.Logic.Models
                 select i;
             if (quantity > 0)
             {
-                if (Products.Count == 0)
+                if(Products.Count() == 0)
                 {
                     Products.Add(new ShoppingCartItem(product, quantity));
-                    Products[0].SetQuantity(1);
                     return Products[0];
                 }
                 else if (Products.Count != 0)
@@ -47,24 +46,19 @@ namespace CKK.Logic.Models
                     foreach (var prod in Products)
                     {
                         count++;
-                        if (prod.GetProduct() != product && count == Products.Count())
-                        {
-                            Products.Add(new ShoppingCartItem(product, quantity));
-                            foreach (var obj in q)
-                            {
-                                obj.SetQuantity(quantity);
-                                return obj;
-                            }
-                            return null;
-                        }
-                        else if (prod.GetProduct() == product)
+                        if (prod.GetProduct() == product)
                         {
                             foreach (var obj in q)
                             {
                                 quantity = obj.GetQuantity() + quantity;
                                 obj.SetQuantity(quantity);
-                                return obj;
-                            }return null;
+                            }
+                            return null;
+                        }
+                        else if (Products.Count() == count)
+                        {
+                            Products.Add(new ShoppingCartItem(product, quantity));
+                            return prod;
                         }
                     }return null;
                 }else { return null; }
@@ -79,12 +73,12 @@ namespace CKK.Logic.Models
                 select i;
             foreach(var prod in q)
             {
-                if (prod.GetQuantity() - quantity < 1 || prod.GetQuantity() < 0 || prod.GetQuantity() == 0)
+                if (prod.GetQuantity() - quantity < 1)
                 {
                     Products.Remove(prod);
                     prod.SetQuantity(0);
                     return prod;
-                }else if(prod.GetQuantity() < 0 || prod.GetQuantity() == 0)
+                }else if(prod.GetProduct() == null || prod.GetQuantity() == 0)
                 {
                     Products.Remove(prod);
                     return prod;
@@ -93,7 +87,7 @@ namespace CKK.Logic.Models
                 {
                     quantity = prod.GetQuantity() - quantity;
                     prod.SetQuantity(quantity);
-                    return prod;
+                    return null;
                 }
             }return null;
         }
@@ -118,15 +112,7 @@ namespace CKK.Logic.Models
 
         public ShoppingCartItem FindStoreItemById(int id)
         {
-            var q =
-                from i in Products
-                where i.GetProduct().GetId() == id
-                select i;
-            foreach (var i in q)
-            {
-                return i;
-            }
-            return null;
+            return Products[id];
         }
     }
 }
