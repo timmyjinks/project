@@ -3,29 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CKK.Logic.Interfaces;
+using CKK.Logic.Exceptions;
 
 namespace CKK.Logic.Models
 {
-    public class Store
+    public class Store : Entity, IStore
     {
-        private int _id;
-        private string _name;
         private List<StoreItem> Items = new List<StoreItem>();
-
-        public int GetId()
-        {
-            return _id;
-        }
-
-        public void SetId(int id)
-        {
-            _id = id;
-        }
-
-        public string GetName()
-        {
-            return _name;
-        }
 
         public void SetName(string name)
         {
@@ -36,7 +21,7 @@ namespace CKK.Logic.Models
         {
             var q =
                 from i in Items
-                where i.GetProduct() == product
+                where i._product == product
                 select i;
             if (quantity > 0)
             {
@@ -51,7 +36,7 @@ namespace CKK.Logic.Models
                     foreach (var prod in Items)
                     {
                         count++;
-                        if (prod.GetProduct() != product && count == Items.Count())
+                        if (prod._product != product && count == Items.Count())
                         {
                             Items.Add(new StoreItem(product, quantity));
                             foreach (var obj in q)
@@ -60,12 +45,12 @@ namespace CKK.Logic.Models
                             }
                             return null;
                         }
-                        else if (prod.GetProduct() == product)
+                        else if (prod._product == product)
                         {
                             foreach (var obj in q)
                             {
-                                quantity = obj.GetQuantity() + quantity;
-                                obj.SetQuantity(quantity);
+                                quantity = obj._quantity + quantity;
+                                obj._quantity = quantity;
                                 return obj;
                             }
                             return null;
@@ -75,30 +60,36 @@ namespace CKK.Logic.Models
                 }
                 else { return null; }
             }
-            else { return null; }
+            else { throw new InventoryStockToolLowException(); }
         }
 
         public StoreItem RemoveStoreItem(int id, int quantity)
         {
             var q =
                 from i in Items
-                where i.GetProduct().GetId() == id
+                where i._product._id == id
                 select i;
-            foreach (var prod in q)
+            if (quantity > 0)
             {
-                if (quantity - prod.GetQuantity() > 0)
+                foreach (var prod in q)
                 {
-                    prod.SetQuantity(0);
-                    return prod;
-                }
-                else
-                {
-                    quantity = prod.GetQuantity() - quantity;
-                    prod.SetQuantity(quantity);
-                    return prod;
-                }
+                    if (quantity - prod._quantity > 0)
+                    {
+                        prod._quantity = 0;
+                        return prod;
+                    }else if (prod._product == null)
+                    {
+                        throw new ProductDoesNotExistException();
+                    }
+                    else
+                    {
+                        quantity = prod._quantity - quantity;
+                        prod._quantity = quantity;
+                        return prod;
+                    }
+                }return null;
             }
-            return null;
+            else { throw new ArgumentOutOfRangeException(); }
         }
 
         public List<StoreItem> GetStoreItems()
@@ -110,12 +101,16 @@ namespace CKK.Logic.Models
         {
             var q =
                 from i in Items
-                where i.GetProduct().GetId() == id
+                where i._product._id == id
                 select i;
-            foreach(var i in q)
+            if (id > 0)
             {
-                return i;
-            }return null;
+                foreach (var i in q)
+                {
+                    return i;
+                }
+                return null;
+            }else { throw new InvalidException(); }
         }
     }
 }

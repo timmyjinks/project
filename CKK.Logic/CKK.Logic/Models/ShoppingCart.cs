@@ -4,34 +4,47 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using CKK.Logic.Interfaces;
+using CKK.Logic.Exceptions;
 
 namespace CKK.Logic.Models
 {
-    public class ShoppingCart
+    public class ShoppingCart : IShoppingCart
     {
-        private Customer _customer;
+        public Customer Customer { get; set; }
         private List<ShoppingCartItem> Products = new List<ShoppingCartItem>();
 
         public ShoppingCart(Customer customer)
         {
-            _customer = customer;
+            Customer = customer;
     }
 
         public int GetCustomerId()
         {
-            return _customer.GetId();
+            return Customer._id;
         }
 
         public ShoppingCartItem GetProductById(int id)
         {
-            return null;
+            var q =
+                from i in Products
+                where i._product._id == id
+                select i;
+            if (id > 0)
+            {
+                foreach (var i in q)
+                {
+                    return i;
+                }return null;
+            }
+            else { throw new InvalidException(); }
         }
 
         public ShoppingCartItem AddProduct(Product product, int quantity)
         {
             var q =
                 from i in Products
-                where i.GetProduct() == product
+                where i._product == product
                 select i;
             if (quantity > 0)
             {
@@ -46,12 +59,12 @@ namespace CKK.Logic.Models
                     foreach (var prod in Products)
                     {
                         count++;
-                        if (prod.GetProduct() == product)
+                        if (prod._product == product)
                         {
                             foreach (var obj in q)
                             {
-                                quantity = obj.GetQuantity() + quantity;
-                                obj.SetQuantity(quantity);
+                                quantity = obj._quantity + quantity;
+                                obj._quantity = quantity;
                             }
                             return null;
                         }
@@ -62,34 +75,44 @@ namespace CKK.Logic.Models
                         }
                     }return null;
                 }else { return null; }
-            }else { return null; }
+            }else { throw new InventoryStockToolLowException(); }
         }
 
         public ShoppingCartItem RemoveProduct(int id, int quantity)
         {
             var q =
                 from i in Products
-                where i.GetProduct().GetId() == id
+                where i._product._id == id
                 select i;
-            foreach(var prod in q)
+            if (quantity > 0)
             {
-                if (prod.GetQuantity() - quantity < 1)
+                foreach (var prod in q)
                 {
-                    Products.Remove(prod);
-                    prod.SetQuantity(0);
-                    return prod;
-                }else if(prod.GetProduct() == null || prod.GetQuantity() == 0)
-                {
-                    Products.Remove(prod);
-                    return prod;
+                    if (prod._quantity - quantity < 1)
+                    {
+                        Products.Remove(prod);
+                        prod._quantity = 0;
+                        return prod;
+                    }
+                    else if (prod._quantity == 0)
+                    {
+                        Products.Remove(prod);
+                        return prod;
+                    }
+                    else if(prod._product == null)
+                    {
+                        throw new ProductDoesNotExistException();
+                    }
+                    else
+                    {
+                        quantity = prod._quantity - quantity;
+                        prod._quantity = quantity;
+                        return null;
+                    }
                 }
-                else
-                {
-                    quantity = prod.GetQuantity() - quantity;
-                    prod.SetQuantity(quantity);
-                    return null;
-                }
-            }return null;
+                return null;
+            }
+            else { throw new ArgumentOutOfRangeException(); }
         }
 
         public decimal GetTotal()
