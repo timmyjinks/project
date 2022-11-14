@@ -10,21 +10,19 @@ namespace CKK.Logic.Models
 {
     public class Store : Entity, IStore
     {
-        private List<StoreItem> Items = new List<StoreItem>();
-
-        public void SetName(string name)
-        {
-            _name = name;
-        }
+        public List<StoreItem> Items = new List<StoreItem>();
 
         public StoreItem AddStoreItem(Product product, int quantity)
         {
             var q =
                 from i in Items
-                where i._product == product
+                where i.Product == product
                 select i;
-            if (quantity > 0)
+            if (quantity <= 0)
             {
+                throw new InventoryItemStockTooLowException();
+            }
+            else {
                 if (Items.Count == 0)
                 {
                     Items.Add(new StoreItem(product, quantity));
@@ -36,7 +34,7 @@ namespace CKK.Logic.Models
                     foreach (var prod in Items)
                     {
                         count++;
-                        if (prod._product != product && count == Items.Count())
+                        if (prod.Product != product && count == Items.Count())
                         {
                             Items.Add(new StoreItem(product, quantity));
                             foreach (var obj in q)
@@ -45,12 +43,12 @@ namespace CKK.Logic.Models
                             }
                             return null;
                         }
-                        else if (prod._product == product)
+                        else if (prod.Product == product)
                         {
                             foreach (var obj in q)
                             {
-                                quantity = obj._quantity + quantity;
-                                obj._quantity = quantity;
+                                quantity = obj.Quantity + quantity;
+                                obj.Quantity = quantity;
                                 return obj;
                             }
                             return null;
@@ -60,34 +58,31 @@ namespace CKK.Logic.Models
                 }
                 else { return null; }
             }
-            else { throw new InventoryStockToolLowException(); }
         }
 
         public StoreItem RemoveStoreItem(int id, int quantity)
         {
             var q =
                 from i in Items
-                where i._product._id == id
+                where i.Product.Id == id
                 select i;
             if (quantity > 0)
             {
                 foreach (var prod in q)
                 {
-                    if (quantity - prod._quantity > 0)
+                    if (quantity - prod.Quantity > 0 || prod.Product == null)
                     {
-                        prod._quantity = 0;
+                        prod.Quantity = 0;
                         return prod;
-                    }else if (prod._product == null)
-                    {
-                        throw new ProductDoesNotExistException();
                     }
                     else
                     {
-                        quantity = prod._quantity - quantity;
-                        prod._quantity = quantity;
+                        quantity = prod.Quantity - quantity;
+                        prod.Quantity = quantity;
                         return prod;
                     }
-                }return null;
+                }
+                throw new ProductDoesNotExistException();
             }
             else { throw new ArgumentOutOfRangeException(); }
         }
@@ -101,7 +96,7 @@ namespace CKK.Logic.Models
         {
             var q =
                 from i in Items
-                where i._product._id == id
+                where i.Product.Id == id
                 select i;
             if (id > 0)
             {
@@ -110,7 +105,7 @@ namespace CKK.Logic.Models
                     return i;
                 }
                 return null;
-            }else { throw new InvalidException(); }
+            }else { throw new InvalidIdException(); }
         }
     }
 }

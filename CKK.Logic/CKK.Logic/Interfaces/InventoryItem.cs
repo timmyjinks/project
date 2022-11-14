@@ -10,21 +10,33 @@ namespace CKK.Logic.Interfaces
 {
     abstract public class InventoryItem
     {
-        public Product _product { get; set; }
-        private int quantity;
-        public int _quantity
+        private Product _Product;
+        public Product Product
         {
             set
             {
-                if(_quantity < 0)
-                {
-                    throw new InventoryStockToolLowException();
-                }
-                else { quantity = value; }
+                _Product = value;
             }
             get
             {
-                return quantity;
+                return _Product;
+            }
+        }
+
+        private int _Quantity;
+        public int Quantity
+        {
+            set
+            {
+                if(value < 0)
+                {
+                    throw new InventoryItemStockTooLowException();
+                }
+                else { _Quantity = value; }
+            }
+            get
+            {
+                return _Quantity;
             }
         }
     }

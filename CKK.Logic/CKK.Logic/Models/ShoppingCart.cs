@@ -12,43 +12,31 @@ namespace CKK.Logic.Models
     public class ShoppingCart : IShoppingCart
     {
         public Customer Customer { get; set; }
-        private List<ShoppingCartItem> Products = new List<ShoppingCartItem>();
+        public List<ShoppingCartItem> Products = new List<ShoppingCartItem>();
 
         public ShoppingCart(Customer customer)
         {
             Customer = customer;
-    }
+        }
 
         public int GetCustomerId()
         {
-            return Customer._id;
-        }
-
-        public ShoppingCartItem GetProductById(int id)
-        {
-            var q =
-                from i in Products
-                where i._product._id == id
-                select i;
-            if (id > 0)
-            {
-                foreach (var i in q)
-                {
-                    return i;
-                }return null;
-            }
-            else { throw new InvalidException(); }
+            return Customer.Id;
         }
 
         public ShoppingCartItem AddProduct(Product product, int quantity)
         {
             var q =
                 from i in Products
-                where i._product == product
+                where i.Product == product
                 select i;
-            if (quantity > 0)
+            if (quantity <= 0)
             {
-                if(Products.Count() == 0)
+                throw new InventoryItemStockTooLowException(); 
+               
+            }else
+            {
+                if (Products.Count() == 0)
                 {
                     Products.Add(new ShoppingCartItem(product, quantity));
                     return Products[0];
@@ -59,12 +47,12 @@ namespace CKK.Logic.Models
                     foreach (var prod in Products)
                     {
                         count++;
-                        if (prod._product == product)
+                        if (prod.Product == product)
                         {
                             foreach (var obj in q)
                             {
-                                quantity = obj._quantity + quantity;
-                                obj._quantity = quantity;
+                                quantity = obj.Quantity + quantity;
+                                obj.Quantity = quantity;
                             }
                             return null;
                         }
@@ -73,57 +61,60 @@ namespace CKK.Logic.Models
                             Products.Add(new ShoppingCartItem(product, quantity));
                             return prod;
                         }
-                    }return null;
-                }else { return null; }
-            }else { throw new InventoryStockToolLowException(); }
+                    }
+                    return null;
+                }
+                else { return null; }
+            }
         }
 
         public ShoppingCartItem RemoveProduct(int id, int quantity)
         {
             var q =
                 from i in Products
-                where i._product._id == id
+                where i.Product.Id == id
                 select i;
-            if (quantity > 0)
+            if (quantity < 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else 
             {
                 foreach (var prod in q)
                 {
-                    if (prod._quantity - quantity < 1)
+                    if (prod.Quantity - quantity < 1 && prod.Quantity > 0)
                     {
                         Products.Remove(prod);
-                        prod._quantity = 0;
+                        prod.Quantity = 0;
                         return prod;
                     }
-                    else if (prod._quantity == 0)
+                    else if (prod.Product == null || prod.Quantity == 0)
                     {
                         Products.Remove(prod);
                         return prod;
-                    }
-                    else if(prod._product == null)
-                    {
-                        throw new ProductDoesNotExistException();
                     }
                     else
                     {
-                        quantity = prod._quantity - quantity;
-                        prod._quantity = quantity;
-                        return null;
+                        quantity = prod.Quantity - quantity;
+                        prod.Quantity = quantity;
+                        return prod;
                     }
-                }
-                return null;
+                }throw new ProductDoesNotExistException();
             }
-            else { throw new ArgumentOutOfRangeException(); }
         }
 
         public decimal GetTotal()
         {
-            var total =
-                from i in Products
-                let value = i.GetTotal()
-                select value;
-            foreach (var prod in total)
+            int count = 1;
+            decimal quantity = 0;
+            foreach (var prod in Products)
             {
-                return prod; 
+                quantity = prod.GetTotal() + quantity;
+                if (count == Products.Count())
+                {
+                    return quantity;
+                }
+                count++;
             }
             return 0;
         }
@@ -133,9 +124,26 @@ namespace CKK.Logic.Models
             return Products;
         }
 
-        public ShoppingCartItem FindStoreItemById(int id)
+        public ShoppingCartItem GetProductById(int id)
         {
-            return Products[id];
+            var q =
+                from i in Products
+                where i.Product.Id == id
+                select i;
+            if (id < 0)
+            {
+                throw new InvalidIdException();
+            }
+            else
+            {
+                foreach (var i in q)
+                {
+                    return i;
+                }
+                return null;
+            }
         }
+
+
     }
 }

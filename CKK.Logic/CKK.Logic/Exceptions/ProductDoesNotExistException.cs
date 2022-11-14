@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace CKK.Logic.Exceptions
 {
     [Serializable]
-    class ProductDoesNotExistException : Exception
+    public class ProductDoesNotExistException : Exception
     {
         public ProductDoesNotExistException() : base() 
         {
-            Console.WriteLine("Product No Exist");
+            Console.WriteLine("ProductDoesNotExsist");
         }
     }
 }

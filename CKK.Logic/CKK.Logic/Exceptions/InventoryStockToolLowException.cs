@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace CKK.Logic.Exceptions
 {
     [Serializable]
-    class InventoryStockToolLowException : Exception
+    public class InventoryItemStockTooLowException : Exception
     {
-        public InventoryStockToolLowException() : base() 
+        public InventoryItemStockTooLowException() : base() 
         {
-            Console.WriteLine("No Stock");
+            Console.WriteLine("InventoryStockTooLow");
         }
     }
 }

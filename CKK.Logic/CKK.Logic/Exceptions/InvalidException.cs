@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace CKK.Logic.Exceptions
 {
     [Serializable]
-    class InvalidException : Exception
+    public class InvalidIdException : Exception
     {
-        public InvalidException() : base() 
+        public InvalidIdException() : base() 
         {
-            Console.WriteLine("Invalid Value");
+            Console.WriteLine("Invalid");
         }
     }
 }
