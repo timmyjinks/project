@@ -10,12 +10,12 @@ namespace CKK.Logic.Models
     public class Customer : Entity
     {
         private string _Address;
-        public string Address 
+        public string Address
         {
             set
             {
                 _Address = value;
-            } 
+            }
             get
             {
                 return _Address;

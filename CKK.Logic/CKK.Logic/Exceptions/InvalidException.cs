@@ -9,9 +9,6 @@ namespace CKK.Logic.Exceptions
     [Serializable]
     public class InvalidIdException : Exception
     {
-        public InvalidIdException() : base() 
-        {
-            Console.WriteLine("Invalid");
-        }
+        public InvalidIdException() : base() { Console.WriteLine("InvalidIdException"); }
     }
 }

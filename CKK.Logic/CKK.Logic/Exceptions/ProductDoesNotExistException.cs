@@ -9,9 +9,6 @@ namespace CKK.Logic.Exceptions
     [Serializable]
     public class ProductDoesNotExistException : Exception
     {
-        public ProductDoesNotExistException() : base() 
-        {
-            Console.WriteLine("ProductDoesNotExsist");
-        }
+        public ProductDoesNotExistException() : base() { Console.WriteLine("ProductDoesNotExistException"); }
     }
 }

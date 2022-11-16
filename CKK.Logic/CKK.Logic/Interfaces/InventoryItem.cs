@@ -28,11 +28,11 @@ namespace CKK.Logic.Interfaces
         {
             set
             {
-                if(value < 0)
+                if (value < 0)
                 {
+                    Console.WriteLine("Quantity");
                     throw new InventoryItemStockTooLowException();
-                }
-                else { _Quantity = value; }
+                }else { _Quantity = value; }
             }
             get
             {

@@ -32,16 +32,16 @@ namespace CKK.Logic.Models
                 select i;
             if (quantity <= 0)
             {
-                throw new InventoryItemStockTooLowException(); 
-               
-            }else
+                Console.WriteLine("ShoppingCartAdd");
+                throw new InventoryItemStockTooLowException();
+            }
+            else
             {
                 if (Products.Count() == 0)
                 {
                     Products.Add(new ShoppingCartItem(product, quantity));
                     return Products[0];
-                }
-                else if (Products.Count != 0)
+                }else if (Products.Count != 0)
                 {
                     int count = 0;
                     foreach (var prod in Products)
@@ -53,18 +53,14 @@ namespace CKK.Logic.Models
                             {
                                 quantity = obj.Quantity + quantity;
                                 obj.Quantity = quantity;
-                            }
-                            return null;
-                        }
-                        else if (Products.Count() == count)
+                            }return null;
+                        }else if (Products.Count() == count)
                         {
                             Products.Add(new ShoppingCartItem(product, quantity));
                             return prod;
                         }
-                    }
-                    return null;
-                }
-                else { return null; }
+                    }return null;
+                }else { return null; }
             }
         }
 
@@ -76,21 +72,17 @@ namespace CKK.Logic.Models
                 select i;
             if (quantity < 0)
             {
+                Console.WriteLine("ShoppingCartRemoveQ");
                 throw new ArgumentOutOfRangeException();
             }
-            else 
+            else
             {
                 foreach (var prod in q)
                 {
-                    if (prod.Quantity - quantity < 1 && prod.Quantity > 0)
+                    if (prod.Quantity - quantity < 1 || prod.Product == null || prod.Quantity == 0)
                     {
                         Products.Remove(prod);
                         prod.Quantity = 0;
-                        return prod;
-                    }
-                    else if (prod.Product == null || prod.Quantity == 0)
-                    {
-                        Products.Remove(prod);
                         return prod;
                     }
                     else
@@ -99,7 +91,7 @@ namespace CKK.Logic.Models
                         prod.Quantity = quantity;
                         return prod;
                     }
-                }throw new ProductDoesNotExistException();
+                }Console.WriteLine("ShoppingCartRemoveP"); throw new ProductDoesNotExistException();
             }
         }
 
@@ -115,8 +107,7 @@ namespace CKK.Logic.Models
                     return quantity;
                 }
                 count++;
-            }
-            return 0;
+            }return 0;
         }
 
         public List<ShoppingCartItem> GetProducts()
@@ -132,6 +123,7 @@ namespace CKK.Logic.Models
                 select i;
             if (id < 0)
             {
+                Console.WriteLine("ShoppingCartId");
                 throw new InvalidIdException();
             }
             else
@@ -143,7 +135,5 @@ namespace CKK.Logic.Models
                 return null;
             }
         }
-
-
     }
 }

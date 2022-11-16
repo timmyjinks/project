@@ -1,5 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
 using CKK.Logic.Models;
+using CKK.Logic.Exceptions;
 
 namespace CKKConsole
 {
@@ -21,15 +27,15 @@ namespace CKKConsole
             c.Id = 3;
             Customer customer = new Customer();
             ShoppingCart cart = new ShoppingCart(customer);
+
             cart.AddProduct(b, 10);
             cart.AddProduct(a, 10);
             cart.AddProduct(c, 10);
 
-            cart.AddProduct(a, 1);
-            
             foreach (var i in cart.GetProducts())
             {
-                Console.WriteLine(i.Product.Name + " || " + i.Quantity + "||" + cart.GetProductById(0).Product.Price);
+                Console.WriteLine(i.Product.Name + "||" + i.Quantity);
+                
             }
         }
     }

@@ -10,12 +10,13 @@ namespace CKK.Logic.Models
     public class Product : Entity
     {
         private decimal _Price;
-        public decimal Price 
+        public decimal Price
         {
             set
             {
-                if(value < 0)
+                if (value < 0)
                 {
+                    Console.WriteLine("Price");
                     throw new ArgumentOutOfRangeException();
                 }
                 else { _Price = value; }

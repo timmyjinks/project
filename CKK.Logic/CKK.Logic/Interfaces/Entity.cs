@@ -15,8 +15,9 @@ namespace CKK.Logic.Interfaces
         {
             set
             {
-                if(value < 0)
+                if (value < 0)
                 {
+                    Console.WriteLine("ID");
                     throw new InvalidIdException();
                 }
                 else
@@ -28,8 +29,8 @@ namespace CKK.Logic.Interfaces
         }
 
         private string _Name;
-        public string Name 
-        { 
+        public string Name
+        {
             set
             {
                 _Name = value;

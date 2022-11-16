@@ -20,15 +20,14 @@ namespace CKK.Logic.Models
                 select i;
             if (quantity <= 0)
             {
-                throw new InventoryItemStockTooLowException();
-            }
-            else {
+               throw new InventoryItemStockTooLowException();
+            }else
+            {
                 if (Items.Count == 0)
                 {
                     Items.Add(new StoreItem(product, quantity));
                     return Items[0];
-                }
-                else if (Items.Count != 0)
+                }else if (Items.Count != 0)
                 {
                     int count = 0;
                     foreach (var prod in Items)
@@ -40,23 +39,18 @@ namespace CKK.Logic.Models
                             foreach (var obj in q)
                             {
                                 return obj;
-                            }
-                            return null;
-                        }
-                        else if (prod.Product == product)
+                            }return null;
+                        }else if (prod.Product == product)
                         {
                             foreach (var obj in q)
                             {
                                 quantity = obj.Quantity + quantity;
                                 obj.Quantity = quantity;
                                 return obj;
-                            }
-                            return null;
+                            }return null;
                         }
-                    }
-                    return null;
-                }
-                else { return null; }
+                    }return null;
+                }else { return null; }
             }
         }
 
@@ -66,7 +60,11 @@ namespace CKK.Logic.Models
                 from i in Items
                 where i.Product.Id == id
                 select i;
-            if (quantity > 0)
+            if (quantity < 0)
+            {
+                throw new ArgumentOutOfRangeException();
+
+            }else 
             {
                 foreach (var prod in q)
                 {
@@ -74,17 +72,14 @@ namespace CKK.Logic.Models
                     {
                         prod.Quantity = 0;
                         return prod;
-                    }
-                    else
+                    }else
                     {
                         quantity = prod.Quantity - quantity;
                         prod.Quantity = quantity;
                         return prod;
                     }
-                }
-                throw new ProductDoesNotExistException();
+                }throw new ProductDoesNotExistException();
             }
-            else { throw new ArgumentOutOfRangeException(); }
         }
 
         public List<StoreItem> GetStoreItems()
@@ -98,14 +93,17 @@ namespace CKK.Logic.Models
                 from i in Items
                 where i.Product.Id == id
                 select i;
-            if (id > 0)
+            if (id < 0)
+            {
+                throw new InvalidIdException();
+                
+            }else 
             {
                 foreach (var i in q)
                 {
                     return i;
-                }
-                return null;
-            }else { throw new InvalidIdException(); }
+                }return null;
+            }
         }
     }
 }

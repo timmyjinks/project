@@ -9,9 +9,6 @@ namespace CKK.Logic.Exceptions
     [Serializable]
     public class InventoryItemStockTooLowException : Exception
     {
-        public InventoryItemStockTooLowException() : base() 
-        {
-            Console.WriteLine("InventoryStockTooLow");
-        }
+        public InventoryItemStockTooLowException() : base() { Console.WriteLine("InventoryItemStockTooLowException"); }
     }
 }
